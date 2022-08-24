@@ -1,67 +1,67 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { GetStaticProps } from "next";
-import { api } from "../../services/api";
+// import React from "react";
+// import { useRouter } from "next/router";
+// import { GetStaticProps } from "next";
 
 
-interface Comment {
-    id: string;
-    body: string;
-}
 
-interface CommentsProps {
-    comments: Comment[];
-}
+// interface Comment {
+//     id: string;
+//     body: string;
+// }
 
-export default function Post({ comments }: CommentsProps) {
+// interface CommentsProps {
+//     comments: Comment[];
+// }
 
-    const router = useRouter();
+// export default function Post({ comments }: CommentsProps) {
 
-    if(router.isFallback){
-        return <p>Loading ...</p>
-    }
+//     const router = useRouter();
 
-    return (
-        <div>
-            <h1>Listagem de Posts</h1>
-            <ul>
-                {comments.map(comment => (
-                    <li key={comment.id}>{comment.body}</li>
-                ))}
-            </ul>
-        </div>
-    );
+//     if(router.isFallback){
+//         return <p>Loading ...</p>
+//     }
 
-}
+//     return (
+//         <div>
+//             <h1>Listagem de Posts</h1>
+//             <ul>
+//                 {comments.map(comment => (
+//                     <li key={comment.id}>{comment.body}</li>
+//                 ))}
+//             </ul>
+//         </div>
+//     );
 
-
-export const getStaticPaths = async () => {
-
-    const response = await api.get(`/posts`);
-    const posts = response.data;
-    const paths = posts.map(post => {
-        return {
-            params: {
-                postId: String(post.id)
-            }
-        }
-    })
-
-    return {
-        paths: paths,
-        fallback: false, // can also be true or 'blocking'
-    }
-}
+// }
 
 
-export const getStaticProps: GetStaticProps<CommentsProps> = async (context) => {
+// export const getStaticPaths = async () => {
 
-    const { id } = context.params;
-    const response = await api.get(`/comments?postId=${id}`);
-    const comments = response.data;
-    return {
-        props: {
-            comments,
-        }, // will be passed to the page component as props
-    }
-}
+//     const response = await api.get(`/posts`);
+//     const posts = response.data;
+//     const paths = posts.map(post => {
+//         return {
+//             params: {
+//                 postId: String(post.id)
+//             }
+//         }
+//     })
+
+//     return {
+//         paths: paths,
+//         fallback: false, // can also be true or 'blocking'
+//     }
+// }
+
+
+// // export const getStaticProps: GetStaticProps<CommentsProps> = async (context) => {
+
+// //     const { id } = context.params;
+// //     const response = await api.get(`/comments?postId=${id}`);
+// //     const comments = response.data;
+// //     return {
+// //         props: {
+// //             comments,
+// //         }, // will be passed to the page component as props
+// //     }
+// // }
