@@ -5,9 +5,7 @@ import ActiveLink from "../ActiveLink";
 
 export default function Header() {
 
-
     return (
-
         <header className={styles.container}>
             <div className={styles.content}>
                 <img src="/logo.svg" alt="DevNews!"/>
@@ -25,9 +23,7 @@ export default function Header() {
                         activeClassName={styles.active}
                     
                     >
-
                         <a>Posts</a>
-
                     </ActiveLink>
 
                 </nav>
